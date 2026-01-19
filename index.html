@@ -166,7 +166,7 @@
         }
 
         #result {
-            margin: 20px auto;
+            margin: 40px auto;
             padding: 25px;
             font-size: 1.1rem;
             max-width: 450px;
@@ -274,6 +274,14 @@
         .home-button:hover .home-icon {
             stroke: #333;
         }
+        
+        .checkbox-container {
+            display: flex;
+            flex-direction: column; /* Arrange items vertically */
+            align-items: center;
+            justify-content: center;
+            direction: rtl;
+        }
 
         @media (max-width: 768px) {
             .input-container {
@@ -349,13 +357,14 @@
             <button type="submit" onclick="validateForm(event)">Check</button>
         </div>
      <div class="warning-message">
-                        <div class="checkbox-container">
+            <div class="checkbox-container">
                 <input type="checkbox" id="warningCheckbox">
-                <label for="warningCheckbox" class="warning-text-bold" style="margin-top: 60px;">
- نحذر عملائنا الكرام من وجود ملصق ضمان مزور يحتوي على رمز إستجابة سريع يوجه المستخدمين لصفحة إلكترونية مزورة تشبه هذه الصفحة.<br>
-                يجب أن يكون عنوان الصفحة يتبع لعنوان موقعنا الرسمي:
-                <span class="warning-url">arabcomputers-com-sa/</span>
-            </p>
+                <label for="warningCheckbox" class="warning-text-bold" style="margin-top: 60px; display: inline-block;">
+                    نحذر عملائنا الكرام من وجود ملصق ضمان مزور يحتوي على رمز إستجابة سريع يوجه المستخدمين لصفحة إلكترونية مزورة تشبه هذه الصفحة.<br>
+                    يجب أن يكون عنوان الصفحة يتبع لعنوان موقعنا الرسمي:
+                    <span class="warning-url">arabcomputers.com.sa/</span>
+                </label>
+            </div>
             <p class="warning-text-normal">
                 <span class="notice-title">Important Notice to Our Valued Customers:</span>
                  We would like to alert you to the presence of counterfeit warranty stickers featuring a QR code that directs users to a fraudulent website designed to imitate the official Arab Computers website.<br>
@@ -435,7 +444,9 @@
                 ["70JWY71Q4A","78F6I74D9Q",
 "2QH3Y50GAK",
 "0UGMQ04A2C",
-// ... (rest of the codes)
+"1TPMO06FQM"
+                // ... يمكنك إضافة المزيد من الرموز هنا
+                ]
             ];
 
             for (const batch of batches) {
@@ -443,7 +454,6 @@
                     const hashedCode = simpleHash(code);
                     codeDatabase[hashedCode] = true;
                 }
-                // إعطاء فرصة للمتصفح للتنفس بين الدفعات
                 await new Promise(resolve => setTimeout(resolve, 0));
             }
             console.log("تم تحميل جميع الرموز.");
@@ -453,6 +463,13 @@
             event.preventDefault();
             const numberInput = document.getElementById('numberInput').value.trim().toUpperCase();
             const resultDiv = document.getElementById('result');
+            
+            if (!numberInput) {
+                resultDiv.textContent = 'Please enter a code - الرجاء إدخال رمز';
+                resultDiv.className = 'error';
+                return;
+            }
+
             const hashedInput = simpleHash(numberInput);
 
             if (codeDatabase[hashedInput]) {
@@ -469,3 +486,4 @@
     </script>
 </body>
 </html>
+
