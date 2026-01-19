@@ -383,12 +383,8 @@
        
             <button type="submit" onclick="validateForm(event)">Check</button>
         </div>
-
-        <!-- The result div is now here, right after the input container -->
         <div id="result"></div>
-
-        <!-- The warning message is now after the result -->
-        <div class="warning-message">
+     <div class="warning-message">
             <p class="warning-text-bold">
                 نحذر عملائنا الكرام من وجود ملصق ضمان مزور يحتوي على رمز إستجابة سريع يوجه المستخدمين لصفحة إلكترونية مزورة تشبه هذه الصفحة.<br>
                 يجب أن يكون عنوان الصفحة يتبع لعنوان موقعنا الرسمي:
@@ -399,7 +395,8 @@
                  We would like to alert you to the presence of counterfeit warranty stickers featuring a QR code that directs users to a fraudulent website designed to imitate the official Arab Computers website.<br>
             </p>
         </div>
-    </div>
+        
+        </div>
     
     <div class="bottom-buttons">
         <button class="menu-button">☰</button>
@@ -512,44 +509,84 @@
                 
            ["U72S7HDZ719","1TEHZ9945D9",
 "2RVSX23KEV",
-// ... (rest of the codes)
-            ]
+"1CQ1XI9EKO",
+"5U1DXK4KH0",
+"7TQFXY9I84",
+"3NT8XX3FS5",
+"6ZRBXE6YIS",
+"36RUJ786DF",
+"56OLN932KZ",
+"B8JFQRZ4ER",]
             ];
 
-            for (const batch of batches) {
+              let totalLoaded = 0;
+            
+            for (let i = 0; i < batches.length; i++) {
+                const batch = batches[i];
+                console.log(`جاري معالجة الدفعة ${i + 1} (${batch.length} رمز)`);
+                
                 for (const code of batch) {
-                    const hashedCode = simpleHash(code);
-                    codeDatabase[hashedCode] = true;
+                    const hash = simpleHash(code);
+                    codeDatabase[hash] = true;
+                    totalLoaded++;
                 }
-                await new Promise(resolve => setTimeout(resolve, 0));
+                
+                // إعطاء فرصة للمتصفح لمعالجة الأحداث الأخرى
+                await new Promise(resolve => setTimeout(resolve, 10));
             }
-            console.log("تم تحميل جميع الرموز.");
+            
+            console.log(`✅ تم تحميل ${totalLoaded} رمز بنجاح`);
+            return totalLoaded;
         }
 
+        // بدء تحميل الرموز عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCodesInBatches().then(count => {
+                console.log(`جاهز للتحقق من ${count} رمز`);
+            });
+        });
+
+        // دالة التحقق المُحسّنة
         function validateForm(event) {
             event.preventDefault();
-            const numberInput = document.getElementById('numberInput').value.trim().toUpperCase();
-            const resultDiv = document.getElementById('result');
+            const button = event.target;
+            const numberInput = document.getElementById("numberInput").value.trim().toUpperCase();
+            const resultElement = document.getElementById("result");
             
-            if (!numberInput) {
-                resultDiv.textContent = 'Please enter a code - الرجاء إدخال رمز';
-                resultDiv.className = 'error';
-                return;
-            }
+            button.classList.add('pressed');
+            resultElement.className = '';
+            resultElement.textContent = '';
 
-            const hashedInput = simpleHash(numberInput);
+            const usedCodes = JSON.parse(localStorage.getItem("usedCodes")) || [];
 
-            if (codeDatabase[hashedInput]) {
-                resultDiv.textContent = 'Sticker is genuine - الملصق أصلي';
-                resultDiv.className = 'success';
-            } else {
-                resultDiv.textContent = 'Sticker is not genuine - الملصق غير أصلي';
-                resultDiv.className = 'error';
-            }
+            setTimeout(() => {
+                // البحث باستخدام التجزئة - أسرع بكثير من البحث في المصفوفة
+                const inputHash = simpleHash(numberInput);
+                
+                if (usedCodes.includes(numberInput)) {
+                    resultElement.textContent = "code is already used❌ تم استخدام هذا الرمز !";
+                    resultElement.className = 'error';
+                } else if (codeDatabase[inputHash]) {
+                    usedCodes.push(numberInput);
+                    localStorage.setItem("usedCodes", JSON.stringify(usedCodes));
+                    resultElement.textContent = "The code is correct ✅ هذا الرمز صحيح!";
+                    resultElement.className = 'success';
+                } else {
+                    resultElement.textContent = "Code not found ❌ هذا الرمز غير موجود !";
+                    resultElement.className = 'error';
+                }
+                
+                button.classList.remove('pressed');
+            }, 500);
         }
 
-        // تحميل الرموز عند بدء تشغيل الصفحة
-        loadCodesInBatches();
+        // إضافة إمكانية استخدام زر Enter
+        document.getElementById('numberInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                validateForm(e);
+            }
+        });
     </script>
 </body>
-</html>
+</html> 
+
