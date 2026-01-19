@@ -69,46 +69,6 @@
             max-width: 800px;
             margin: 0 auto 30px auto;
         }
-        
-        .arabic-text {
-            font-family: 'Traditional Arabic', 'Arial Arabic', 'Simplified Arabic', sans-serif;
-            font-size: 1rem;
-            direction: rtl;
-            display: inline-block;
-        }
-        
-        .warning-message {
-            color: red;
-            margin: 25px 0;
-            padding: 0;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .warning-text-bold {
-            font-weight: bold;
-            margin-bottom: 0;
-            line-height: 1.4;
-        }
-
-        .warning-text-normal {
-            font-weight: normal;
-            margin-top: 10px;
-            line-height: 1.4;
-        }
-
-        .notice-title {
-            font-weight: bold;
-            display: block;
-        }
-
-        .warning-url {
-            text-decoration: underline;
-            font-weight: bold;
-            color: #000000;
-            display: block;
-            margin: 5px 0;
-        }
 
         .banner {
             width: 100%;
@@ -167,26 +127,26 @@
 
         #result {
             margin: 20px auto;
-            padding: 25px;
+            padding: 25px; /* الحفاظ على المساحة الداخلية */
             font-size: 1.1rem;
             max-width: 450px;
-            min-height: 100px;
+            min-height: 100px; /* الحفاظ على الارتفاع */
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            background-color: transparent;
-            border: none;
+            background-color: transparent; /* إزالة الخلفية */
+            border: none; /* إزالة الحدود */
         }
 
         .success {
-            color: #90EE90;
-            font-weight: bold;
+            color: #90EE90; /* لون الخط الأخضر */
+            font-weight: bold; /* الخط عريض */
         }
 
         .error {
-            color: #ff0000;
-            font-weight: bold;
+            color: #ff0000; /* لون الخط الأحمر */
+            font-weight: bold; /* الخط عريض */
         }
 
         .links {
@@ -279,7 +239,7 @@
             .input-container {
                 width: 70%;
             }
-            
+
             .input-container button {
                 padding: 12px 20px;
             }
@@ -296,8 +256,24 @@
 
         @media (max-width: 480px) {
             .input-container {
+                width: 90%;
+            }
 
+            .input-container button {
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-content">
+            <img src="https://i.postimg.cc/zvf2c47L/image.png" alt="Website Logo" class="logo">
+            <div class="breadcrumb">
+                <a href="#">Home</a> / <a href="#">Check sticker</a>
+            </div>
         </div>
+
         <h2>Warranty sticker validation</h2>
 
         <p class="main-description">
@@ -311,25 +287,6 @@
             Enter the number shown on the sticker in this box<br>
             أدخل الرقم الموجود على الملصق هنا   
         </p>
-        <p class="main-description">
-            Check if the warranty sticker on your product is genuine and protect yourself from fake sticker.<br>
-            <span class="arabic-text">تأكد إذا كان ملصق الضمان الموجود على منتجك هو ملصق أصلي أو مزيف</span>
-     <span class="arabic-text">الشكل القديم </span>
-     
-        </p>
-
-        <img src="https://i.postimg.cc/05tBw257/undefined-Imgur.png" alt="Website Banner" class="banner">
-<p class="main-description">
-        <span class="arabic-text">الشكل الجديد</span>
-     
-        </p>
-
-        <img src="https://i.ibb.co/3m3r1TWK/Warranty-sticker-26.jpg" alt="Website Banner" class="banner">
-        
-        <p class="input-instruction">
-            Enter the number shown on the sticker in this box<br>
-            أدخل الرقم الموجود على الملصق هنا   
-        </p>
 
         <div class="input-container">
             <input type="text" id="numberInput" placeholder="XXXXXX">
@@ -339,6 +296,7 @@
         <div id="result"></div>
     </div>
 
+    <!-- الأزرار في الجزء السفلي -->
     <div class="bottom-buttons">
         <button class="menu-button">☰</button>
         <button class="home-button">
@@ -348,6 +306,7 @@
         </button>
     </div>
 
+    <!-- روابط مفيدة -->
     <div class="links">
         <div class="left-section">
             <div>
@@ -10388,11 +10347,9 @@
 "3TPNX1PF2Q", 
 "8TDLW12RNJ", 
 "3QFD18EA78" ];
-            
-
             const numberInput = document.getElementById("numberInput").value;
             const resultElement = document.getElementById("result");
-            
+
             button.classList.add('pressed');
 
             resultElement.className = '';
@@ -10402,7 +10359,7 @@
 
             setTimeout(() => {
                 if (usedCodes.includes(numberInput)) {
-                    resultElement.textContent = "Code is already used❌ تم استخدام هذا الرمز !";
+                    resultElement.textContent = "code is already used❌ تم استخدام هذا الرمز !";
                     resultElement.className = 'error';
                 } else if (allowedCodes.includes(numberInput)) {
                     usedCodes.push(numberInput);
@@ -10413,10 +10370,10 @@
                     resultElement.textContent = "Code not found ❌ هذا الرمز غير موجود !";
                     resultElement.className = 'error';
                 }
-                
+
                 button.classList.remove('pressed');
             }, 500);
         }
     </script>
 </body>
-</html>
+    </html>
