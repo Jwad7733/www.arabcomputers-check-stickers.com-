@@ -279,7 +279,8 @@
         <p class="main-description">
             Check if the warranty sticker on your product is genuine.<br>
             تأكد إذا كان ملصق الضمان الموجود على منتجك هو ملصق أصلي أو مزيف
-           
+          </p>
+ 
             <span class="arabic-text">الشكل القديم </span>
      
         </p>
@@ -296,6 +297,14 @@
             Enter the number shown on the sticker in this box<br>
             أدخل الرقم الموجود على الملصق هنا   
         </p>
+
+        <div class="input-container">
+            <input type="text" id="numberInput" placeholder="XXXXXX">
+            <button type="submit" onclick="validateForm(event)">Check</button>
+        </div>
+
+        <div id="result"></div>
+    </div>
 <p class="main-description">
         <span class="arabic-text">نحذر عملائنا الكرام من وجود ملصق ضمان مزور يحتوي على رمز إستجابة سريع يوجه المستخدمين لصفحة إلكترونية مزورة تشبه هذه الصفحة.
 يجب أن يكون عنوان الصفحة يتبع لعنوان موقعنا الرسمي: 
@@ -305,14 +314,6 @@ Important Notice to Our Valued Customers:
 We would like to alert you to the presence of counterfeit warranty stickers featuring a QR code that directs users to a fraudulent website designed to imitate the official Arab Computers website.لشكل الجديد</span>
      
         </p>
-        <div class="input-container">
-            <input type="text" id="numberInput" placeholder="XXXXXX">
-            <button type="submit" onclick="validateForm(event)">Check</button>
-        </div>
-
-        <div id="result"></div>
-    </div>
-
     <!-- الأزرار في الجزء السفلي -->
     <div class="bottom-buttons">
         <button class="menu-button">☰</button>
