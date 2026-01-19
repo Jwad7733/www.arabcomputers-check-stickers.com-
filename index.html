@@ -349,8 +349,14 @@
             <button type="submit" onclick="validateForm(event)">Check</button>
         </div>
      <div class="warning-message">
-            <p class="warning-text-bold">
-                نحذر عملائنا الكرام من وجود ملصق ضمان مزور يحتوي على رمز إستجابة سريع يوجه المستخدمين لصفحة إلكترونية مزورة تشبه هذه الصفحة.<br>
+            <div class="checkbox-container">
+    <input type="checkbox" id="warningCheckbox">
+    <br><br><br><br>  <!-- هذا هو الجزء الذي تمت إضافته -->
+    <label for="warningCheckbox" class="warning-text-bold">
+        ...
+    </label>
+</div>
+ نحذر عملائنا الكرام من وجود ملصق ضمان مزور يحتوي على رمز إستجابة سريع يوجه المستخدمين لصفحة إلكترونية مزورة تشبه هذه الصفحة.<br>
                 يجب أن يكون عنوان الصفحة يتبع لعنوان موقعنا الرسمي:
                 <span class="warning-url">arabcomputers-com-sa/</span>
             </p>
