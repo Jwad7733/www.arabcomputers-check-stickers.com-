@@ -166,7 +166,7 @@
         }
 
         #result {
-            margin: 40px auto; /* Increased vertical margin */
+            margin: 40px auto;
             padding: 25px;
             font-size: 1.1rem;
             max-width: 450px;
@@ -277,13 +277,10 @@
         
         .checkbox-container {
             display: flex;
+            flex-direction: column; /* Arrange items vertically */
             align-items: center;
             justify-content: center;
             direction: rtl;
-        }
-
-        .checkbox-container input[type="checkbox"] {
-            margin-left: 15px; /* Increased space */
         }
 
         @media (max-width: 768px) {
@@ -362,6 +359,7 @@
      <div class="warning-message">
             <div class="checkbox-container">
                 <input type="checkbox" id="warningCheckbox">
+                <br><br><br><br>
                 <label for="warningCheckbox" class="warning-text-bold">
                     نحذر عملائنا الكرام من وجود ملصق ضمان مزور يحتوي على رمز إستجابة سريع يوجه المستخدمين لصفحة إلكترونية مزورة تشبه هذه الصفحة.<br>
                     يجب أن يكون عنوان الصفحة يتبع لعنوان موقعنا الرسمي:
